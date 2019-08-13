@@ -1,0 +1,55 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scripts/menu.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/backgrounds/mountain/sky_fc.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/backgrounds/mountain/far_mountains_fc.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/backgrounds/mountain/grassy_mountains_fc.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/backgrounds/mountain/clouds_mid_fc.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/backgrounds/mountain/hill.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/backgrounds/mountain/clouds_front_fc.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/interface/buttons/play_idle.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/interface/buttons/play_pressed.png" type="Texture" id=9]
+
+[node name="menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="bg_sky" type="Sprite" parent="."]
+position = Vector2( 192.216, 108.144 )
+texture = ExtResource( 2 )
+
+[node name="bg_mountain" type="Sprite" parent="."]
+texture = ExtResource( 3 )
+centered = false
+
+[node name="bg_peaks" type="Sprite" parent="."]
+texture = ExtResource( 4 )
+centered = false
+
+[node name="bg_fog" type="Sprite" parent="."]
+texture = ExtResource( 5 )
+centered = false
+
+[node name="bg_hill" type="Sprite" parent="."]
+texture = ExtResource( 6 )
+centered = false
+
+[node name="bg_clouds" type="Sprite" parent="."]
+texture = ExtResource( 7 )
+centered = false
+
+[node name="play_btn" type="TextureButton" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -16.0
+margin_top = -52.0
+margin_right = 17.0
+margin_bottom = -30.0
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 9 )
+expand = true
+stretch_mode = 5
+[connection signal="button_up" from="play_btn" to="." method="_on_play_btn_button_up"]
