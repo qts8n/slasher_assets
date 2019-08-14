@@ -1,8 +1,8 @@
 extends Position2D
 
 onready var adventurer : Node = $".."
-    
-func _physics_process(delta : float) -> void:
+
+func _physics_process(_delta : float) -> void:
     update_pivot_angle()
 
 # Changes camera direction

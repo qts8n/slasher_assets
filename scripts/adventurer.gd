@@ -1,52 +1,68 @@
-extends KinematicBody2D
+# adventurer.gd
+# Main character class
+# warning-ignore-all:unused_class_variable
 
-onready var sprite : AnimatedSprite = $animation_sprite
+extends Entity
 
-export var move_speed := 75
-export var jump_force := 150
-export var gravity := 300
-export var snapping := true  # Turns on/off snapping to the surface
-export var thrh := 50.0  # Snapping threshold
+export var type := "adventurer"  # see `take_damage()` method of Entity
+export var move_speed := 100.0
+export var jump_force := 200.0
+export var hitstun_length := 15
+export var health := 100  # see `take_damage()` method of Entity
+export var hitstun_thrs := 5
 
-var velocity := Vector2()
-var direction := 1.0
-var snap := false  # Snapped state flag
+var velocity := Vector2.ZERO
+var direction := 0  # also used in camera script, see `camera.gd`
+var animation := "idle"
+
 
 func _physics_process(delta : float) -> void:
-    # Moving direction: -1 <= 0 <= 1
-    direction = Input.get_action_strength("move_right") - \
-        Input.get_action_strength("move_left")
-    velocity.x = direction * move_speed
-        
-    if Input.is_action_just_pressed("jump") and (not snapping or snap):
-        velocity.y = -jump_force
-        snap = false
-        
-    velocity.y += gravity * delta
-    if snapping:
-        var snap_v = Vector2(0, 32) if snap else Vector2()
-        velocity = move_and_slide_with_snap(velocity, snap_v, Vector2.UP, thrh)
-    else:
-        velocity = move_and_slide(velocity)
-    
-    # Check if landed
-    # `is_on_floor()` method will work correctly only if snapping is enabled
-    if snapping and is_on_floor() and not snap:
-        snap = true
-    update_animation(velocity)
+    # Wait for attack animation to finish
+    var attacked = "attack" in animation
+    if attacked:
+        yield(sprite, "animation_finished")
 
+    if hitstun_length - hitstun <= hitstun_thrs:  # was hit recently
+        velocity = knockback * move_speed
+    else:  # healthy state
+        # moving direction: -1 / 0 / 1
+        direction = int(Input.is_action_pressed("move_right")) - \
+            int(Input.is_action_pressed("move_left"))
+        # Calculate X-velocity
+        velocity.x = 0.0 if attacked else direction * move_speed
+        # Calculate Y-velocity
+        if Input.is_action_just_pressed("jump") and is_on_floor():
+            velocity.y = -jump_force
+    velocity.y += world.gravity * delta
 
-func update_animation(velocity : Vector2) -> void:
-    var animation := "idle"
-    
-    if abs(velocity.x) > 10.0:
-        sprite.flip_h = velocity.x < 0
-        animation = "run"
-    
-    # FIXME: Jumping animation not works without snapping
-    if snapping and not is_on_floor():
-        animation = "jump"
-        
+    # Make a move
+    velocity = move_and_slide(velocity, world.floor_normal)
+
+    # Take damage if there is any
+    take_damage()
+
+    # Update aimation
+    if animation == "hit":  # wait for hit animation to finish
+        yield(sprite, "animation_finished")
+    animation = update_animation(velocity)
     if sprite.animation != animation:
         sprite.play(animation)
-        
+
+
+func update_animation(velocity : Vector2) -> String:
+    var curr_animation := "idle"
+
+    if abs(velocity.x) > 0.0:
+        sprite.flip_h = velocity.x < 0.0
+        curr_animation = "run"
+
+    if Input.is_action_just_pressed("attack_upwards"):
+        curr_animation = "attack_upwards"
+
+    if not is_on_floor():
+        curr_animation = "jump"
+
+    if hitstun != 0:
+        curr_animation = "hit"
+
+    return curr_animation

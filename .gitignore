@@ -1,8 +1,7 @@
 #### GODOT ####
-.import/*
+.import/
 export.cfg
 export_presets.cfg
-!.import/.gitkeep
 
 #### VIM ####
 # Swap
