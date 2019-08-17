@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sky_fc.png-db8f6409fc641a7902899c345e76507e.stex"
+path="res://.import/sky_fc.png-55c5f5dbda7fe7f627c78b4b77a35543.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/backgrounds/mountain/sky_fc.png"
-dest_files=[ "res://.import/sky_fc.png-db8f6409fc641a7902899c345e76507e.stex" ]
+source_file="res://assets/sprites/backgrounds/hill/sky_fc.png"
+dest_files=[ "res://.import/sky_fc.png-55c5f5dbda7fe7f627c78b4b77a35543.stex" ]
 
 [params]
 

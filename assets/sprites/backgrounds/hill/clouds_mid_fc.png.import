@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hill.png-5122bf7c1764b369ef20fe218e8e8a20.stex"
+path="res://.import/clouds_mid_fc.png-928ac065b4fda6ce4e0842d36528b699.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/backgrounds/mountain/hill.png"
-dest_files=[ "res://.import/hill.png-5122bf7c1764b369ef20fe218e8e8a20.stex" ]
+source_file="res://assets/sprites/backgrounds/hill/clouds_mid_fc.png"
+dest_files=[ "res://.import/clouds_mid_fc.png-928ac065b4fda6ce4e0842d36528b699.stex" ]
 
 [params]
 

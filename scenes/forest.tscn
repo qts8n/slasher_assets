@@ -287,38 +287,44 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
 [node name="forest" type="Node2D"]
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+[node name="parallax_bg" type="ParallaxBackground" parent="."]
 editor/display_folded = true
 
-[node name="bg_layer" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="sky_layer" type="ParallaxLayer" parent="parallax_bg"]
 motion_offset = Vector2( 0, -216 )
 motion_mirroring = Vector2( 384, 216 )
 
-[node name="bg" type="Sprite" parent="ParallaxBackground/bg_layer"]
+[node name="sky" type="Sprite" parent="parallax_bg/sky_layer"]
 texture = ExtResource( 1 )
 centered = false
 
-[node name="mountain_layer" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="mountain_layer" type="ParallaxLayer" parent="parallax_bg"]
 motion_scale = Vector2( 0.25, 1 )
 motion_mirroring = Vector2( 384, 0 )
 
-[node name="bg_mountain" type="Sprite" parent="ParallaxBackground/mountain_layer"]
+[node name="mountain" type="Sprite" parent="parallax_bg/mountain_layer"]
 texture = ExtResource( 2 )
 centered = false
 
-[node name="forest_layer" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="forest_layer" type="ParallaxLayer" parent="parallax_bg"]
 motion_scale = Vector2( 0.5, 1 )
 motion_mirroring = Vector2( 384, 0 )
 
-[node name="bg_forest" type="Sprite" parent="ParallaxBackground/forest_layer"]
+[node name="forest" type="Sprite" parent="parallax_bg/forest_layer"]
 texture = ExtResource( 3 )
 centered = false
 
-[node name="adventurer" parent="." instance=ExtResource( 4 )]
+[node name="adventurer" parent="." groups=[
+"mm_get_hit",
+"player",
+] instance=ExtResource( 4 )]
 position = Vector2( 370.821, 117.89 )
 
-[node name="ghoul" parent="." instance=ExtResource( 5 )]
-position = Vector2( 490.14, 162.216 )
+[node name="ghoul" parent="." groups=[
+"mm_get_hit",
+"mob",
+] instance=ExtResource( 5 )]
+position = Vector2( 479.546, 162.141 )
 
 [node name="ground" type="TileMap" parent="."]
 tile_set = SubResource( 15 )

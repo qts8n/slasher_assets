@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sky_lightened.png-23ae3111b34741543cb354cf71ed07e8.stex"
+path="res://.import/clouds_MG_3.png-b81b2a250fb8ef90a09dd9c5637081c8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/backgrounds/snow/sky_lightened.png"
-dest_files=[ "res://.import/sky_lightened.png-23ae3111b34741543cb354cf71ed07e8.stex" ]
+source_file="res://assets/sprites/backgrounds/mountain/clouds_MG_3.png"
+dest_files=[ "res://.import/clouds_MG_3.png-b81b2a250fb8ef90a09dd9c5637081c8.stex" ]
 
 [params]
 

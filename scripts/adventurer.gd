@@ -4,65 +4,68 @@
 
 extends Entity
 
-export var type := "adventurer"  # see `take_damage()` method of Entity
+# General
+export var type := "adventurer"
 export var move_speed := 100.0
 export var jump_force := 200.0
-export var hitstun_length := 15
-export var health := 100  # see `take_damage()` method of Entity
-export var hitstun_thrs := 5
+export var health := 100
+export var damage := 20
+export var knockback_strength := 500.0
+export var knockback_length := 0.05
 
-var velocity := Vector2.ZERO
-var direction := 0  # also used in camera script, see `camera.gd`
-var animation := "idle"
+# Specific
+export var dash_strength := 200.0
 
+# Inside
+var state := "idle"
+onready var ray: RayCast2D = $hitbox/attack
 
-func _physics_process(delta : float) -> void:
-    # Wait for attack animation to finish
-    var attacked = "attack" in animation
-    if attacked:
-        yield(sprite, "animation_finished")
+func _physics_process(delta: float) -> void:
+    match state:
+        "attack_upwards", "attack_forward":
+            state_attack()
+        "hit":
+            state_hit()
+        _:
+            state_default()
 
-    if hitstun_length - hitstun <= hitstun_thrs:  # was hit recently
-        velocity = knockback * move_speed
-    else:  # healthy state
-        # moving direction: -1 / 0 / 1
-        direction = int(Input.is_action_pressed("move_right")) - \
-            int(Input.is_action_pressed("move_left"))
-        # Calculate X-velocity
-        velocity.x = 0.0 if attacked else direction * move_speed
-        # Calculate Y-velocity
-        if Input.is_action_just_pressed("jump") and is_on_floor():
-            velocity.y = -jump_force
-    velocity.y += world.gravity * delta
-
-    # Make a move
-    velocity = move_and_slide(velocity, world.floor_normal)
-
-    # Take damage if there is any
-    take_damage()
-
-    # Update aimation
-    if animation == "hit":  # wait for hit animation to finish
-        yield(sprite, "animation_finished")
-    animation = update_animation(velocity)
-    if sprite.animation != animation:
-        sprite.play(animation)
+    # Move
+    gravity_loop(delta)
+    move()
 
 
-func update_animation(velocity : Vector2) -> String:
-    var curr_animation := "idle"
-
+func state_default() -> void:
+    # Animation adjustents
+    animation_loop()
+    if not is_on_floor():
+        sprite.play("jump")
     if abs(velocity.x) > 0.0:
         sprite.flip_h = velocity.x < 0.0
-        curr_animation = "run"
+        ray.cast_to.x = (-1 if sprite.flip_h else 1) * abs(ray.cast_to.x)
 
-    if Input.is_action_just_pressed("attack_upwards"):
-        curr_animation = "attack_upwards"
+    # Calculate velocity
+    direction = int(Input.is_action_pressed("move_right")) - \
+            int(Input.is_action_pressed("move_left"))
+    direction_loop()
 
-    if not is_on_floor():
-        curr_animation = "jump"
+    # Actions
+    if Input.is_action_just_pressed("jump") and is_on_floor():
+        jump()
+    elif Input.is_action_just_pressed("attack_upwards"):
+        attack("upwards")
+    elif Input.is_action_just_pressed("attack_forward"):
+        attack("forward")
 
-    if hitstun != 0:
-        curr_animation = "hit"
 
-    return curr_animation
+func state_attack() -> void:
+    animation_loop()
+    if state == "attack_forward":
+        velocity.x = (1 if not sprite.flip_h else -1) * dash_strength
+    yield(sprite, "animation_finished")
+    state = "idle"
+
+
+func state_hit() -> void:
+    animation_loop()
+    yield(stun, "timeout")
+    state = "idle"

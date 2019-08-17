@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/far_mountains_fc.png-30c5bb37bf23daea5686c12afaa24cb3.stex"
+path="res://.import/far_mountains_fc.png-4700c98b88d73e02dd961d444badbf9e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/backgrounds/mountain/far_mountains_fc.png"
-dest_files=[ "res://.import/far_mountains_fc.png-30c5bb37bf23daea5686c12afaa24cb3.stex" ]
+source_file="res://assets/sprites/backgrounds/hill/far_mountains_fc.png"
+dest_files=[ "res://.import/far_mountains_fc.png-4700c98b88d73e02dd961d444badbf9e.stex" ]
 
 [params]
 

@@ -1,14 +1,15 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/menu.gd" type="Script" id=1]
-[ext_resource path="res://assets/sprites/backgrounds/mountain/sky_fc.png" type="Texture" id=2]
-[ext_resource path="res://assets/sprites/backgrounds/mountain/far_mountains_fc.png" type="Texture" id=3]
-[ext_resource path="res://assets/sprites/backgrounds/mountain/grassy_mountains_fc.png" type="Texture" id=4]
-[ext_resource path="res://assets/sprites/backgrounds/mountain/clouds_mid_fc.png" type="Texture" id=5]
-[ext_resource path="res://assets/sprites/backgrounds/mountain/hill.png" type="Texture" id=6]
-[ext_resource path="res://assets/sprites/backgrounds/mountain/clouds_front_fc.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/backgrounds/hill/sky_fc.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/backgrounds/hill/far_mountains_fc.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/backgrounds/hill/grassy_mountains_fc.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/backgrounds/hill/clouds_mid_fc.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/backgrounds/hill/hill.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/backgrounds/hill/clouds_front_fc.png" type="Texture" id=7]
 [ext_resource path="res://assets/sprites/interface/buttons/play_idle.png" type="Texture" id=8]
 [ext_resource path="res://assets/sprites/interface/buttons/play_pressed.png" type="Texture" id=9]
+
 
 [node name="menu" type="Control"]
 anchor_right = 1.0

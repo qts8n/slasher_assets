@@ -1,3 +1,6 @@
+# world.gd (autoload)
+# Game world constants
+
 extends Node
 
 const gravity := 650
