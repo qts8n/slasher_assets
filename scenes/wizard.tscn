@@ -25,7 +25,7 @@ animations = [ {
 "speed": 6.0
 }, {
 "frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
-"loop": true,
+"loop": false,
 "name": "attack_fireball",
 "speed": 8.0
 } ]
