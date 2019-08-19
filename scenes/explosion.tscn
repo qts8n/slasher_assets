@@ -1,0 +1,24 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://assets/sprites/fx/explosion/_02_explosion.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/fx/explosion/_03_explosion.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/fx/explosion/_04_explosion.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/fx/explosion/_05_explosion.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/fx/explosion/_06_explosion.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/fx/explosion/_07_explosion.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/fx/explosion/_08_explosion.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/fx/explosion/_09_explosion.png" type="Texture" id=8]
+[ext_resource path="res://scripts/effect.gd" type="Script" id=9]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
+"loop": false,
+"name": "default",
+"speed": 10.0
+} ]
+
+[node name="explosion" type="AnimatedSprite"]
+scale = Vector2( 0.5, 0.5 )
+frames = SubResource( 1 )
+script = ExtResource( 9 )

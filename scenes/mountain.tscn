@@ -7,8 +7,8 @@
 [ext_resource path="res://assets/sprites/backgrounds/mountain/clouds_MG_2.png" type="Texture" id=5]
 [ext_resource path="res://assets/sprites/backgrounds/mountain/cloud_lonely.png" type="Texture" id=6]
 [ext_resource path="res://assets/sprites/backgrounds/mountain/tileset.png" type="Texture" id=7]
-[ext_resource path="res://scenes/adventurer.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/wizard.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/wizard.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/adventurer.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/fireball.tscn" type="PackedScene" id=10]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
@@ -252,20 +252,20 @@ cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( -65488, 3, 0, 131070, 3, 0, 131120, 4, 0, 327678, 4, 0, 262192, 4, 0, 458750, 4, 0, 393264, 4, 0, 589822, 4, 0, 524288, 536870918, 0, 524331, 536870918, 0, 524335, 6, 0, 524336, 4, 0, 589828, 536870919, 0, 720894, 4, 0, 655361, 8, 0, 655405, 536870920, 0, 655408, 5, 0, 786417, 0, 0, 786420, 0, 0, 786423, 2, 0, 786426, 1, 0, 786429, 0, 0, 720896, 1, 0, 720899, 0, 0, 720902, 1, 0, 720905, 1, 0, 720908, 1, 0, 720911, 2, 0, 720914, 0, 0, 720917, 2, 0, 720920, 2, 0, 720923, 1, 0, 720926, 0, 0, 720929, 1, 0, 720932, 2, 0, 720935, 2, 0, 720938, 0, 0, 720941, 0, 0, 720944, 1, 0, 720947, 1, 0, 720950, 2, 0, 720953, 0, 0, 720956, 0, 0, 851966, 5, 0, 983025, 1073741829, 0, 983027, 1073741829, 0, 983029, 1073741829, 0, 983031, 1073741829, 0, 983033, 1073741829, 0, 983035, 1073741829, 0, 983037, 1073741829, 0, 983039, 1073741829, 0, 917505, 1073741829, 0, 917507, 1073741829, 0, 917509, 1073741829, 0, 917511, 1073741829, 0, 917513, 1073741829, 0, 917515, 1073741829, 0, 917517, 1073741829, 0, 917519, 1073741829, 0, 917521, 1073741829, 0, 917523, 1073741829, 0, 917525, 1073741829, 0, 917527, 1073741829, 0, 917529, 1073741829, 0, 917531, 1073741829, 0, 917533, 1073741829, 0, 917535, 1073741829, 0, 917537, 1073741829, 0, 917539, 1073741829, 0, 917541, 1073741829, 0, 917543, 1073741829, 0, 917545, 1073741829, 0, 917547, 1073741829, 0, 917549, 1073741829, 0, 917551, 1073741829, 0, 917553, 1073741829, 0, 917555, 1073741829, 0, 917557, 1073741829, 0, 917559, 1073741829, 0, 917561, 1073741829, 0, 917563, 1073741829, 0, 917565, 1073741829, 0 )
 
+[node name="wizard" parent="." groups=[
+"mob",
+"mm_get_hit",
+] instance=ExtResource( 8 )]
+position = Vector2( 258.236, 122.861 )
+z_index = 2
+
 [node name="adventurer" parent="." groups=[
 "mm_get_hit",
 "player",
-] instance=ExtResource( 8 )]
-position = Vector2( 112.054, 135.944 )
-z_index = 1
-
-[node name="wizard" parent="." groups=[
-"mm_get_hit",
-"mob",
 ] instance=ExtResource( 9 )]
-position = Vector2( 258.236, 122.861 )
-z_index = 1
+position = Vector2( 112.054, 135.944 )
+z_index = 2
 
 [node name="fireball" parent="." instance=ExtResource( 10 )]
 position = Vector2( 196.935, 136.726 )
-z_index = 1
+z_index = 2

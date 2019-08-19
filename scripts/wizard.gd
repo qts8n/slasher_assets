@@ -15,9 +15,8 @@ export var move_timer_length := 300
 # Inside
 var state := "idle"
 var move_timer := move_timer_length
-onready var adventurer: KinematicBody2D = get_parent().find_node("adventurer") \
-        as KinematicBody2D
-
+onready var adventurer: KinematicBody2D = get_parent().find_node("adventurer")
+onready var explosion := preload("res://scenes/explosion.tscn").instance()
 
 func _physics_process(delta: float) -> void:
     animation_loop()
@@ -26,21 +25,19 @@ func _physics_process(delta: float) -> void:
             state_attack()
         "hit":
             state_hit()
+        "death":
+            state_death(explosion)
         _:
             state_default()
     gravity_loop(delta)
 
 
-
-func animation_loop():
-    .animation_loop()
-    if not adventurer:
-        return
-    sprite.flip_h = adventurer.transform.origin.x > transform.origin.x
-
-
 func state_default() -> void:
-    # Decide jump
+    # Animation adjustents
+    if adventurer:
+        sprite.flip_h = adventurer.transform.origin.x > transform.origin.x
+
+    # Actions
     if move_timer > 0:
         move_timer -= 1
     else:
@@ -48,6 +45,7 @@ func state_default() -> void:
             jump()
         attack("fireball", false)
         move_timer = move_timer_length
+
     # Move
     move()
 
@@ -55,11 +53,4 @@ func state_default() -> void:
 func state_attack() -> void:
     move()
     yield(sprite, "animation_finished")
-    state = "idle"
-
-
-func state_hit() -> void:
-    move()
-    yield(stun, "timeout")
-    velocity.x = 0.0
     state = "idle"

@@ -21,6 +21,7 @@ var state := "idle"
 onready var ray: RayCast2D = $hitbox/attack
 
 func _physics_process(delta: float) -> void:
+    animation_loop()
     match state:
         "attack_upwards", "attack_forward":
             state_attack()
@@ -28,22 +29,18 @@ func _physics_process(delta: float) -> void:
             state_hit()
         _:
             state_default()
-
-    # Move
     gravity_loop(delta)
-    move()
 
 
 func state_default() -> void:
     # Animation adjustents
-    animation_loop()
     if not is_on_floor():
         sprite.play("jump")
     if abs(velocity.x) > 0.0:
         sprite.flip_h = velocity.x < 0.0
         ray.cast_to.x = (-1 if sprite.flip_h else 1) * abs(ray.cast_to.x)
 
-    # Calculate velocity
+    # Decide direction
     direction = int(Input.is_action_pressed("move_right")) - \
             int(Input.is_action_pressed("move_left"))
     direction_loop()
@@ -56,16 +53,25 @@ func state_default() -> void:
     elif Input.is_action_just_pressed("attack_forward"):
         attack("forward")
 
+    # Move
+    move()
+
 
 func state_attack() -> void:
-    animation_loop()
+    move()
     if state == "attack_forward":
-        velocity.x = (1 if not sprite.flip_h else -1) * dash_strength
+        velocity.x = (-1 if sprite.flip_h else 1) * dash_strength
     yield(sprite, "animation_finished")
     state = "idle"
 
 
-func state_hit() -> void:
-    animation_loop()
-    yield(stun, "timeout")
-    state = "idle"
+func _on_ghost_timer_timeout() -> void:
+    if state != "attack_forward":
+        return
+
+    var ghost := preload("res://scenes/ghost.tscn").instance() as Sprite
+    ghost.position = position
+    ghost.texture = sprite.frames.get_frame(sprite.animation, sprite.frame)
+    ghost.flip_h = sprite.flip_h
+    ghost.z_index = sprite.z_index - 1
+    get_parent().add_child(ghost)
